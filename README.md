@@ -1,4 +1,4 @@
-# FastAPI Project with ECS Fargate Deployment
+# FastAPI RNAseq Project
 
 ## Overview
 
