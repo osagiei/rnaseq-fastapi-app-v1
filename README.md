@@ -27,7 +27,8 @@ This project is a FastAPI-based web application designed to handle RNASeq data. 
 git clone https://github.com/osagiei/rnaseq-fastapi-app-v1.git
 cd rnaseq-fastapi-app/ecs
 ```
-2. Set Up the Environment
+2. Set Up the Environment.
+   
 Create a .env file with the following variables:
 ```
 SECRET_KEY=
@@ -45,13 +46,15 @@ DBNAME=
 ```
 pip install -r requirements.txt
 ```
-4. Run Locally with Docker
+4. Run Locally with Docker.
+   
 Build and run the Docker container locally:
 ```
 docker build -t fastapi-app .
 docker run -p 8000:80 fastapi-app
 ```
-5. Deploy to AWS with Terraform
+5. Deploy to AWS with Terraform.
+   
 Navigate to the terraform directory and apply the Terraform configuration:
 ```
 cd ..
