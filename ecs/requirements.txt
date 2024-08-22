@@ -1,0 +1,17 @@
+fastapi
+uvicorn
+sqlalchemy
+pydantic[email]
+passlib
+pytest
+mysql-connector-python
+pymysql
+python-jose
+pandas
+numpy
+jinja2
+python-multipart
+plotly
+boto3
+python-dotenv
+scikit-learn

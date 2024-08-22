@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EDA Results</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://localhost:8000/static/navbar.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        .plot-container {
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            margin-top: 40px;
+        }
+        #tau-distribution, #pca-plot, #gene-distribution, #heatmap {
+            height: 400px;
+        }
+        .info-text {
+            display: flex;
+            align-items: top;  
+            justify-content: center; 
+            text-align: left; 
+            padding: 40px;
+            font-size: 1.2rem;
+            color: #333;
+            background-color: white;  
+            border-radius: 10px;
+        }
+        body {
+            background-color: white;  
+        }
+    </style>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+        <div class="container-fluid p-4">
+          <a class="navbar-brand" href="/landing">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-layout-wtf" viewBox="0 0 16 16">
+              <path d="M5 1v8H1V1zM1 0a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1zm13 2v5H9V2zM9 1a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM5 13v2H3v-2zm-2-1a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1zm12-1v2H9v-2zm-6-1a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1z"/>
+            </svg>&nbsp;&nbsp;RNASEQ
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/landing">Dataset</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">EDA</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" aria-disabled="true">DE Analysis</a>
+              </li>
+              <li class="nav-item">
+                 <a class="nav-link" href="/">Logout</a>
+            </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+    
+      <div class="container mt-5">
+        <div class="row">
+            <h4>Exploratory Data Analysis Overview</h4>
+            <div class="col-md-6 info-text">
+                <div>
+                    <b></b><b></b><b></b>
+                    <p>This section provides a summary of the expressed protein-coding and non-coding genes within the dataset. The pie chart to the right gives a visual breakdown of the proportions of these gene types.</p>
+                    <b></b><b></b><b></b>
+                    <p>Below are plots describing tissue specificity of expressed genes, expectedly showing protein coding genes more broadly expressed in all samples.</p>
+                </div>
+            </div>
+            <div class="col-md-6 plot-container">
+                <h4>Expressed biotypes</h4>
+                <div id="gene-distribution">
+                    {{ gene_distribution | safe }}
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 plot-container">
+                <h4>Tissue Specificity</h4>
+                <div id="tau-distribution">
+                    {{ tau_distribution | safe }}
+                </div>
+            </div>
+            <div class="col-md-6 plot-container">
+                <h4>Sample Clustering (PCA)</h4>
+                <div id="pca-plot">
+                    {{ pca_plot | safe }}
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 plot-container">
+                <h4>Heatmap of Top 1000 Genes by Standard Deviation</h4>
+                <div id="heatmap">
+                    {{ heatmap | safe }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
